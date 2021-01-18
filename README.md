@@ -15,10 +15,10 @@ Software para el manejo administrativo de difusión de noticias academicas, gene
 3. copy .env.example .env
 4. php artisan key:generate
 5. Configurar el archivo .env
-5.1. DB_PORT=
-5.2. DB_DATABASE=
-5.3. DB_USERNAME=
-5.4. DB_PASSWORD=
+5. 1. DB_PORT=
+5. 2. DB_DATABASE=
+5. 3. DB_USERNAME=
+5. 4. DB_PASSWORD=
 6. php artisan migrate
 7. npm install
 8. npm run dev
