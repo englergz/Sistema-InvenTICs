@@ -8,6 +8,22 @@ Elaborado en Laravel en la versión 8.x + TailwindCSS + Jetstream + Livewire + S
 
 Software para el manejo administrativo de difusión de noticias academicas, generar cuentas, realizar publicaciones(estilo blog), manejo de roles (Admin, Estudiante, Docente...), permisos (para publicar, generar cuenta, crear roles...)
 
+## Instalación
+
+1. git clone https://github.com/englergonzalez/ProyectoALEN.git
+2. composer install
+3. copy .env.example .env
+4. php artisan key:generate
+5. Configurar el archivo .env 
+    DB_PORT=
+    DB_DATABASE=
+    DB_USERNAME=
+    DB_PASSWORD=
+6. npm install
+7. npm run dev
+8. php artisan serve
+
+
 ## Licencia
 
 
