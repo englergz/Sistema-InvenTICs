@@ -25,7 +25,7 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                             <div>
-                                <div class="text-sm font-bold text-gray-700 tracking-wide">Documento de Identidad</div>
+                                <div class="text-sm font-bold text-gray-700 tracking-wide">Correo electronico</div>
                                 <input class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-red-500 rounded-full py-3 px-6"
                                 placeholder="1012345678" id="email" class="block mt-1 w-full" type="" name="email" :value="old('email')" required autofocus>
                             </div>

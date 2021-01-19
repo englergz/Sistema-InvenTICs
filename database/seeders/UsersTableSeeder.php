@@ -24,9 +24,9 @@ class UsersTableSeeder extends Seeder
         $studentRole=Role::create(['name' => 'Estudiante', 'display_name' => 'Estudiante']);
         $tacherRole= Role::create(['name' => 'Docente', 'display_name' => 'Profesor']);
         $parentRole= Role::create(['name' => 'Padres', 'display_name' => 'Acudiente']);
-        $parentRole= Role::create(['name' => 'Director', 'display_name' => 'Director de curso']);
-        $parentRole= Role::create(['name' => 'Representante', 'display_name' => 'Representante de curso']);
         $writerRole= Role::create(['name' => 'Escritor', 'display_name' => 'Escritor']);
+        Role::create(['name' => 'Director', 'display_name' => 'Director de curso']);
+        Role::create(['name' => 'Representante', 'display_name' => 'Representante de curso']);
 
         $viewPostsPermission = Permission::create([
             'name' => 'Ver publicaciones',
