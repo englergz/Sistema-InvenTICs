@@ -9,7 +9,7 @@ Elaborado en Laravel en la versión 8.x + TailwindCSS + Jetstream + Livewire + S
 Software para el manejo administrativo de difusión de noticias academicas, generar cuentas, realizar publicaciones(estilo blog), manejo de roles (Admin, Estudiante, Docente...), permisos (para publicar, generar cuenta, crear roles...)
 
 ## Grupo de Trabajo
-Estudiantes de 10mo semestre, Ingeniería de Sistemas.
+    Estudiantes de 10mo semestre, Ingeniería de Sistemas.
     - Alvaro Caicedo
     - Engler Gonzalez
     
