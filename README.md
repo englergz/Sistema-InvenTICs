@@ -6,7 +6,7 @@ Proyecto en desarrollo, de momento para el curso academico
 
 ## Descripción
 
-    Software para el manejo administrativo de difusión de noticias academicas, generar cuentas, realizar publicaciones(estilo blog), manejo de roles (Admin, Estudiante, Docente...), permisos (para publicar, generar cuenta, crear roles...)
+Software para el manejo administrativo de difusión de noticias academicas, generar cuentas, realizar publicaciones(estilo blog), manejo de roles (Admin, Estudiante, Docente...), permisos (para publicar, generar cuenta, crear roles...)
 
 ## Grupo de Trabajo
     Estudiantes de 10mo semestre, Ingeniería de Sistemas.
@@ -40,4 +40,4 @@ Proyecto en desarrollo, de momento para el curso academico
 
 ## Licencia
 
-    El marco de Laravel es un software de código abierto con licencia bajo el [Licencia MIT](https://opensource.org/licenses/MIT).
+   El marco de Laravel es un software de código abierto con licencia bajo el [Licencia MIT](https://opensource.org/licenses/MIT).
