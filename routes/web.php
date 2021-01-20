@@ -26,7 +26,7 @@ Route::get('tags/{tag}', [App\Http\Controllers\TagsController::class, 'show'])
 
 //Rutas con autenticación, rol y permisos
 Route::group([
-    "middleware" => ['auth:sanctum', 'verified'] ], 
+    "middleware" => ['auth', 'verified'] ], 
     function() {
         Route::view('/dashboard', "admin.dashboard")->name('dashboard');
 
