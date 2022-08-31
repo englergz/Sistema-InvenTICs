@@ -30,7 +30,7 @@ Software para el manejo administrativo de equipos y/o dispositivos, asignación 
 ## Poner en marcha
 
     1. Iniciar sesión: 
-    2. Admin: joseeduardo@hotmail.com, Contraseña: 12341234
+    2. Admin: jose@gmail.com, Contraseña: 12341234
     3. Agsinar permisos a los roles o directamente a un usuario.
     Contraseña por defecto para todos los usuarios es la misma "12341234"
 
