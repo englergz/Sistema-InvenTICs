@@ -3,7 +3,7 @@
         <h1>Crear rol</h1>
         <div class="section-header-breadcrumb">
 			<div class="breadcrumb-item active"><a href="#">Tablero</a></div>
-			<div class="breadcrumb-item active"><a href="#">Institución</a></div>
+			<div class="breadcrumb-item active"><a href="#">Configuración</a></div>
             <div class="breadcrumb-item">Crear rol</div>
 		</div>
     </x-slot>

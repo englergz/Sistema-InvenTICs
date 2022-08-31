@@ -27,18 +27,18 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return $user->id === $post->user_id || $user->hasPermissionTo('Ver publicaciones');
+        return $user->id === $post->user_id || $user->hasPermissionTo('Ver productos');
     }
 
     /**
-     * Determine whether the user can create publicaciones.
+     * Determine whether the user can create productos.
      *
      * @param  \App\User  $user
      * @return mixed
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo('Crear publicaciones');
+        return $user->hasPermissionTo('Crear productos');
     }
 
     /**
@@ -50,7 +50,7 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id === $post->user_id || $user->hasPermissionTo('Actualizar publicaciones');
+        return $user->id === $post->user_id || $user->hasPermissionTo('Actualizar productos');
     }
 
     /**
@@ -62,6 +62,6 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === $post->user_id || $user->hasPermissionTo('Eliminar publicaciones');
+        return $user->id === $post->user_id || $user->hasPermissionTo('Eliminar productos');
     }
 }

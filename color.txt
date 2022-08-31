@@ -1,6 +1,9 @@
-c21324-rojo
-
 1abc9c-original
-145A32-verde
+
+de claro a oscuro...
+#0203f7-azul
+#1b1581-azul-principal
+#072f50-azul
+#0a1939-azul
 
 #3abaf4 - azul info.

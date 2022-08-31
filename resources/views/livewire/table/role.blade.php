@@ -6,12 +6,17 @@
                     Identificador
                     @include('components.sort-icon', ['field' => 'name'])
                 </a></th>
-                <th><a wire:click.prevent="sortBy('display_name')" role="button" href="#">
+                <th><a wire:click.prevent="sortBy('display_name')" role="button">
                     Nombre
                     @include('components.sort-icon', ['field' => 'display_name'])
                 </a></th>
-                <th> Permisos</th>
-                <th>...</th>
+                <th><a wire:click.prevent="sortBy('display_name')" role="button">
+                    Permisos
+                </a></th>
+                <th><a wire:click.prevent="sortBy('display_name')" role="button">
+                     Usuarios 
+                </a></th>
+                <th>Action</th>
             </tr>
         </x-slot>
         <x-slot name="body">
@@ -32,28 +37,33 @@
                         </span>
                     </td>
                     <td>
-                        @if(!is_null($role->permissions))
+                        @if($role->id == 1)
+                            <small class="px-2 inline-flex text-xs">Todos los permisos</small>
+                        @elseif(!is_null($role->permissions))
+                            <span class="px-2 inline-flex text-xs">
+                               {{ $role->permissions->pluck('name')->implode(', ') }}
+                            </span>
+                        @elseif(is_null($role->permissions))
+                            <span class="px-2 inline-flex text-xs">Sin permisos</span>
+                        @endif
+                    </td>
+                    <td>
+                        @if(!is_null($role->users))
                             <span class=" px-2 inline-flex text-xs leading-5 font-semibold rounded-full  bg-blue-100">
-                               {{ $role->permissions->pluck('display_name')->implode(', ') }}
+                               {{ $role->users->pluck('name')->implode(', ') }}
                             </span>
                         @else
-                            @if ($role->id === 1)
-                                Todos los permisos
-                            @else
-                                Sin permisos
-                            @endif
+                            Sin usuarios
                         @endif
                     </td>
                     <td class="whitespace-no-wrap row-action--icon">
-                        @can('update', $role)
-                                <a role="button" href="{{ route('admin.roles.edit', $role) }}" class="mr-3"><i class="fa fa-16px fa-pen"></i></a>
-                        @endcan
-                        @can('delete', $role)
-                            @if ($role->id > 4 )
+                      
+                                <a role="button" href="{{ route('admin.roles.edit', $role) }}" class="mr-3"><i class="fa fa-16px fa-pencil"></i></a>
+                        
+                            @if ($role->id > 2 )
                                 {{ csrf_field() }} {{ method_field('DELETE') }}
                                 <a role="button" x-on:click.prevent="deleteItem" href="#"><i class="fa fa-16px fa-trash text-red-500"></i></a>
                             @endif
-                        @endcan
                     </td>
                 </tr>
             @endforeach

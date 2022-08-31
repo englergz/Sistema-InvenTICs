@@ -26,7 +26,7 @@
             <footer class="container-flex space-between">
 
                 <div class="read-more">
-                    <a href="{{ route('posts.show', $post) }}" class="text-uppercase c-green">Comentarios</a>
+                    <a href="{{ route('posts.show', $post) }}" class="text-uppercase c-green">ver más detalles</a>
                 </div>
 
                 @include('posts.tags')
@@ -39,7 +39,7 @@
     <article class="post">
         <div class="content-post">
 
-            <h1>No hay publicaciones todavía.</h1>
+            <h1>No hay productos todavía.</h1>
 
         </div>
     </article>

@@ -33,6 +33,25 @@ class Main extends Component
     public function get_pagination_data ()
     {
         switch ($this->name) {
+            case 'employee':
+                $employees = $this->model::search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+
+                return [
+                    "view" => 'livewire.table.employee',
+                    "employees" => $employees,
+                    "data" => array_to_object([
+                        'href' => [
+                            'create_new' => route('admin.employees.create'),
+                            'create_new_text' => 'Registrar empleado',
+                            'export' => '/employees/exportar',
+                            'export_text' => 'Exportar'
+                        ]
+                    ])
+                ];
+                break;
+                
             case 'user':
                 $users = $this->model::search($this->search)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
@@ -45,7 +64,7 @@ class Main extends Component
                         'href' => [
                             'create_new' => route('admin.users.create'),
                             'create_new_text' => 'Crear usuario',
-                            'export' => '#',
+                            'export' => '/users/exportar',
                             'export_text' => 'Exportar'
                         ]
                     ])
@@ -62,7 +81,7 @@ class Main extends Component
                     "data" => array_to_object([
                         'href' => [
                             'create_new' => route('admin.posts.store', '#create'),
-                            'create_new_text' => 'Crear publicación',
+                            'create_new_text' => 'Crear producto',
                             'export' => '#',
                             'export_text' => 'Exportar'
                         ]
@@ -73,7 +92,6 @@ class Main extends Component
                 $roles = $this->model::search($this->search)
                     ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
                     ->paginate($this->perPage);
-
                 return [
                     "view" => 'livewire.table.role',
                     "roles" => $roles,
@@ -99,7 +117,7 @@ class Main extends Component
                     "data" => array_to_object([
                         'href' => [
                             'create_new' => '#',
-                            'create_new_text' => 'Crear permiso',
+                            'create_new_text' => '',
                             'export' => '#',
                             'export_text' => 'Exportar'
                         ]

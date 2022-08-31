@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Events\UserWasCreated;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use App\Http\Requests\UpdateUserRequest;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
@@ -42,15 +47,16 @@ class UsersController extends Controller
 
         $roles = Role::with('permissions')->get();
         $permissions = Permission::pluck('name', 'id');
+        $employees = Employee::get();
 
-        return view('admin.users.create', compact('user', 'roles', 'permissions'));
+        return view('admin.users.create', compact('user', 'roles', 'permissions','employees'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\ 
      */
     public function store(Request $request)
     {
@@ -62,7 +68,7 @@ class UsersController extends Controller
         ]);
 
         $data['password'] = "12341234";
-
+        $data['employee_id'] = 'employee';
         $user = User::create($data);
 
         if($request->filled('roles'))
@@ -138,5 +144,9 @@ class UsersController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index')->withFlash('Usuario eliminado');
+    }
+
+    public function export(){
+        return Excel::download(new UsersExport, 'users.xlsx');
     }
 }

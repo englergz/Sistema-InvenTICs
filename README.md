@@ -6,16 +6,14 @@ Proyecto en desarrollo, de momento para el curso academico
 
 ## Descripción
 
-Software para el manejo administrativo de difusión de noticias academicas, generar cuentas, realizar publicaciones(estilo blog), manejo de roles (Admin, Estudiante, Docente...), permisos (para publicar, generar cuenta, crear roles...)
+Software para el manejo administrativo de equipos y/o dispositivos, asignación de responsables, calidad de préstamo, generar cuentas, registrar productos(estilo blog), manejo de roles (Admin, Supervisor...), permisos (para publicar, generar cuenta, crear roles...)
 
 ## Grupo de Trabajo
-    Estudiante de 10mo semestre, Ingeniería de Sistemas.
-    - Engler Gonzalez
-    
+    Egresado de Ingeniería de Sistemas.
 
 ## Instalación
 
-    1. git clone https://github.com/englergonzalez/ProyectoALEN.git
+    1. git clone 
     2. composer install
     3. copy .env.example .env
     4. php artisan key:generate
@@ -32,7 +30,7 @@ Software para el manejo administrativo de difusión de noticias academicas, gene
 ## Poner en marcha
 
     1. Iniciar sesión: 
-    2. Admin: englergonzalez@hotmail.com, Contraseña: 12341234
+    2. Admin: joseeduardo@hotmail.com, Contraseña: 12341234
     3. Agsinar permisos a los roles o directamente a un usuario.
     Contraseña por defecto para todos los usuarios es la misma "12341234"
 

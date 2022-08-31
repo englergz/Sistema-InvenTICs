@@ -15,6 +15,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('marca');
             $table->string('title');
             $table->string('url')->unique()->nullable();
             $table->mediumText('iframe')->nullable();

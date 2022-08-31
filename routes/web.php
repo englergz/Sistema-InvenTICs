@@ -4,12 +4,27 @@ use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UsersRolesController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\EmployeesController;
 use App\Http\Controllers\Admin\UsersPermissionsController;
 use App\Http\Controllers\Admin\PhotosController;
 
 //PagesController
-Route::get('/', [PagesController::class, 'home'])
-    ->name('pages.home');
+//Route::get('/', [PagesController::class, 'home'])
+//    ->name('pages.home');
+
+Route::get('/pdf', function(){
+    $Pdf = App::make('dompdf.wrapper');
+
+    $Pdf->loadHTML('<h1>Test</h1>');
+
+    return $Pdf->stream(); 
+});
+
+
+Route::get('/', function(){
+        return view('auth.login');
+    });
 Route::get('nosotros', [PagesController::class, 'about'])
     ->name('pages.about');
 Route::get('archivo', [PagesController::class, 'archive'])
@@ -30,11 +45,15 @@ Route::group([
     function() {
         Route::view('/dashboard', "admin.dashboard")->name('dashboard');
 
+        Route::get('/users/exportar', [UsersController::class,'export']);
+        Route::get('/employees/exportar', [EmployeesController::class,'export']);
+
         Route::post('posts/{post}/photos', [PhotosController::class,'store'])->name('admin.posts.photos.store');
         Route::delete('photos/{photo}', [PhotosController::class, 'destroy'])->name('admin.photos.destroy');
 
         Route::resource('posts', 'Admin\PostsController', ['except' => 'show', 'as' => 'admin']);
         Route::resource('users', 'Admin\UsersController', ['as' => 'admin']);
+        Route::resource('employees', 'Admin\EmployeesController', ['as' => 'admin']);
         Route::resource('roles', 'Admin\RolesController', ['except' => 'show', 'as' => 'admin']);
         Route::resource('permissions', 'Admin\PermissionsController', ['only' => ['index', 'edit', 'update'], 'as' => 'admin']);
 

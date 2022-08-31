@@ -27,8 +27,15 @@
                         {{ csrf_field() }}
 
                         <div class="form-group">
-                            <label for="name">Nombre</label>
-                            <input name="name" value="{{ old('name') }}" class="form-control">
+                        
+                            <select name="name" class="form-control select2">
+								@foreach ($employees as $employee)
+									<option value="{{ $employee->first_name }} {{ $employee->surname}}"
+											{{ old('name', $user->employee_id) == $employee->id ? 'selected' : '' }}
+									>{!! $employee->first_name !!} {{$employee->surname}}</option>
+								@endforeach
+							</select>
+							{!! $errors->first('employee_id', '<span class="text-red-600">:message</span>') !!}
                         </div>
 
                         <div class="form-group">

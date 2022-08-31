@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 class Post extends Model
 {
 	protected $fillable = [
-        'title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id', 'user_id'
+        'marca','title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id', 'user_id'
     ];
 
     protected $dates = ['published_at'];

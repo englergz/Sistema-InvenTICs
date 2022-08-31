@@ -7,17 +7,43 @@ body{
 		display: none !important;
 	}
 	.logoHome{
-		width: 45%;
+		text-align: center;
 	}
 }
-.b{
-	inline-size: flex;
-	border: 0px;
-	border-radius: 50%; 
+.logoHome{
+	text-align: center;
 }
+
 .preload{
-	border:1.2px solid #c21324;
-	width: 50%;
+	border:3.2px solid #072f50;
+	width: 60%;
+}
+header nav{
+	text-align: center;
+  }
+
+  header  nav ul{
+	 list-style: none;
+	 display: inline-block;
+  }
+
+  header nav ul li{
+	  margin: 0 10px;
+  }
+
+  header nav ul li a {
+	  text-decoration: none;
+	  color: #333333;
+	  font-family: "lato", sans-serif;
+	  font-weight: bold;
+  }
+
+  header nav ul li a:hover{
+	border-bottom: 2px solid #072f50;
+	padding-bottom: 5px;
+}
+.pure-menu-item{
+	text-align: center;
 }
 header nav li{
 	margin: 0 10px;
@@ -29,12 +55,11 @@ header nav li a{
 	font-weight: bold;
 }
 header nav li a:hover{
-	border-bottom: 2px solid #c21324;
+	border-bottom: 2px solid #072f50;
 	padding-bottom: 5px;
 }
-
-.logo img{
-	width: 150px;
+.logoHome{
+	text-align: center;
 }
 
 .buttonLogin {
@@ -53,7 +78,7 @@ header nav li a:hover{
 	padding: 65px 100px;
 }
 .post .category{
-	background: #145A32;
+	background: #1b1581;
 	padding: 5px 10px;
 	color: white;
 	position: absolute;
@@ -134,7 +159,7 @@ cite .img-cite, .cite .img-cite{
 }
 
 .footer footer{
-	background: #145a32;
+	background: #1b1581;
 	padding: 45px;
 	text-align: center;
 	color: #ffffff;
@@ -245,6 +270,7 @@ a.btn-bar{
 }
 
 .custom-wrapper {
+	text-align: center;
 	margin-bottom: 1em;
 	-webkit-font-smoothing: antialiased;
 	height: 3em;
@@ -263,8 +289,12 @@ a.btn-bar{
 	height: 9em;
 }
 
+.menu{
+	text-align: center;
+}
+
 .custom-menu-3 {
-	text-align: right;
+	text-align: center;
 }
 
 .custom-toggle {
@@ -278,7 +308,7 @@ a.btn-bar{
 }
 
 .custom-toggle .bar {
-	background-color: #c21324;
+	background-color: #0101fe;
 	display: block;
 	width: 20px;
 	height: 2px;

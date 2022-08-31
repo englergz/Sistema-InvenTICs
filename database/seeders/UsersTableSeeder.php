@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Employee;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -19,32 +20,29 @@ class UsersTableSeeder extends Seeder
         Permission::truncate();
         Role::truncate();
         User::truncate();
+        Employee::truncate();
 
         $adminRole = Role::create(['name' => 'Admin', 'display_name' => 'Administrador']);
-        $studentRole=Role::create(['name' => 'Estudiante', 'display_name' => 'Estudiante']);
-        $tacherRole= Role::create(['name' => 'Docente', 'display_name' => 'Profesor']);
-        $parentRole= Role::create(['name' => 'Padres', 'display_name' => 'Acudiente']);
-        $writerRole= Role::create(['name' => 'Escritor', 'display_name' => 'Escritor']);
-        Role::create(['name' => 'Director', 'display_name' => 'Director de curso']);
-        Role::create(['name' => 'Representante', 'display_name' => 'Representante de curso']);
-
+        $superRole = Role::create(['name' => 'Supervisor', 'display_name' => 'Supervisor']);
+        Role::create(['name' => 'Funcionario', 'display_name' => 'Funcionario']);
+//Producto
         $viewPostsPermission = Permission::create([
-            'name' => 'Ver publicaciones',
-            'display_name' => 'Ver publicaciones'
+            'name' => 'Ver productos',
+            'display_name' => 'Ver productos'
         ]);
         $createPostsPermission = Permission::create([
-            'name' => 'Crear publicaciones',
-            'display_name' => 'Crear publicaciones'
+            'name' => 'Crear productos',
+            'display_name' => 'Crear productos'
         ]);
         $updatePostsPermission = Permission::create([
-            'name' => 'Actualizar publicaciones',
-            'display_name' => 'Actualizar publicaciones'
+            'name' => 'Actualizar productos',
+            'display_name' => 'Actualizar productos'
         ]);
         $deletePostsPermission = Permission::create([
-            'name' => 'Eliminar publicaciones',
-            'display_name' => 'Eliminar publicaciones'
+            'name' => 'Eliminar productos',
+            'display_name' => 'Eliminar productos'
         ]);
-
+//Cuenta
         $viewUsersPermission = Permission::create([
             'name' => 'Ver usuarios',
             'display_name' => 'Ver usuarios'
@@ -61,7 +59,24 @@ class UsersTableSeeder extends Seeder
             'name' => 'Eliminar usuarios',
             'display_name' => 'Eliminar usuarios'
         ]);
-
+//Empleado
+        $viewUsersPermission = Permission::create([
+            'name' => 'Ver empleado',
+            'display_name' => 'Ver empleado'
+        ]);
+        $createUsersPermission = Permission::create([
+            'name' => 'Crear empleado',
+            'display_name' => 'Crear empleado'
+        ]);
+        $updateUsersPermission = Permission::create([
+            'name' => 'Actualizar empleado',
+            'display_name' => 'Actualizar empleado'
+        ]);
+        $deleteUsersPermission = Permission::create([
+            'name' => 'Eliminar empleado',
+            'display_name' => 'Eliminar empleado'
+        ]);
+//Role
         $viewRolesPermission = Permission::create([
             'name' => 'Ver roles',
             'display_name' => 'Ver roles'
@@ -78,7 +93,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Eliminar roles',
             'display_name' => 'Eliminar roles'
         ]);
-
+//Permiso
         $viewPermissionsPermission = Permission::create([
             'name' => 'Ver permisos',
             'display_name' => 'Ver permisos'
@@ -88,60 +103,101 @@ class UsersTableSeeder extends Seeder
             'display_name' => 'Actualizar permisos'
         ]);
 
+//crear empleado        
+        $empleado = new Employee;
+        $empleado->type_id ='CC';
+        $empleado->num_id = '1087000113';
+        $empleado->first_name = 'Jose';
+        $empleado->second_name = 'Eduardo';
+        $empleado->surname = 'Solís';
+        $empleado->second_surname = '';
+        $empleado->profession = 'Ingeniero de Sistemas';
+        $empleado->process = 'Departamento TICs';
+        $empleado->position = 'Practicante';
+        $empleado->email = 'joseeduardo@hotmail.com';
+        $empleado->phone = '3110001111';
+        $empleado->address = 'Libertad';
+        $empleado->save();
+
+        $empleado = new Employee;
+        $empleado->type_id ='CC';
+        $empleado->num_id = '1087888113';
+        $empleado->first_name = 'Luis';
+        $empleado->second_name = 'Felipe';
+        $empleado->surname = 'Quintero';
+        $empleado->second_surname = 'Ortiz';
+        $empleado->profession = 'Condador';
+        $empleado->process = 'Departamento de Finanzas';
+        $empleado->position = 'Practicante';
+        $empleado->email = '';
+        $empleado->phone = '3110012344';
+        $empleado->address = 'Av. La Playa';
+        $empleado->save();
+
+        $empleado = new Employee;
+        $empleado->type_id ='CC';
+        $empleado->num_id = '1087000777';
+        $empleado->first_name = 'Cristian';
+        $empleado->second_name = 'Eduardo';
+        $empleado->surname = 'Cortes';
+        $empleado->second_surname = 'Cortes';
+        $empleado->profession = 'Ingeniero de Sistemas';
+        $empleado->process = 'Departamento TICs';
+        $empleado->position = 'Director';
+        $empleado->email = '';
+        $empleado->phone = '3110001555';
+        $empleado->address = 'Viento Libre';
+        $empleado->save();
+
+        $empleado = new Employee;
+        $empleado->type_id ='CC';
+        $empleado->num_id = '1087000222';
+        $empleado->first_name = 'Carmen';
+        $empleado->second_name = 'America';
+        $empleado->surname = 'Hurtado';
+        $empleado->second_surname = 'Gomez';
+        $empleado->profession = 'Tecnologa';
+        $empleado->process = 'Departamento TICs';
+        $empleado->position = 'Auxiliar Administrativa';
+        $empleado->email = '';
+        $empleado->phone = '3110007777';
+        $empleado->address = 'Barrio ciudadela';
+        $empleado->save();
+
+//crear cuenta
+
         $admin = new User;
-        $admin->name = 'Engler Gonzalez';
-        $admin->email = 'englergonzalez@hotmail.com';
+        $admin->employee_id = 1;
+        $admin->name = 'Jose Solís';
+        $admin->email = 'jose@gmail.com';
         $admin->password = '12341234';
         $admin->save();
 
         $admin->assignRole($adminRole);
 
-        $writer = new User;
-        $writer->name = 'Jorge';
-        $writer->email = 'jorge@gmail.com';
-        $writer->password = '12341234';
-        $writer->save();
+        $super = new User;
+        $admin->employee_id = 2;
+        $super->name = 'Luis Quintero';
+        $super->email = 'luis@gmail.com';
+        $super->password = '12341234';
+        $super->save();
 
-        $writer->assignRole($writerRole);
+        $super->assignRole($superRole);
 
-        $parent = new User;
-        $parent->name = 'Luis';
-        $parent->email = 'luis@gmail.com';
-        $parent->password = '12341234';
-        $parent->save();
+        $funcionario = new User;
+        $admin->employee_id = 3;
+        $funcionario->name = 'Cristian Cortes';
+        $funcionario->email = 'cortes@gmail.com';
+        $funcionario->password = '12341234';
+        $funcionario->save();
 
-        $parent->assignRole($parentRole);
+        $super = new User;
+        $admin->employee_id = 4;
+        $super->name = 'Carmen Hurtado';
+        $super->email = 'carmen@gmail.com';
+        $super->password = '12341234';
+        $super->save();
 
-        $student = new User;
-        $student->name = 'Engler Prado';
-        $student->email = 'englerprado@gmail.com';
-        $student->password = '12341234';
-        $student->save();
-
-        $student->assignRole($studentRole);
-
-        $tacher = new User;
-        $tacher->name = 'Eduard';
-        $tacher->email = 'eduard@gmail.com';
-        $tacher->password = '12341234';
-        $tacher->save();
-
-        $tacher->assignRole($tacherRole);
-
-        $parent = new User;
-        $parent->name = 'Carmen';
-        $parent->email = 'carmen@gmail.com';
-        $parent->password = '12341234';
-        $parent->save();
-
-        $parent->assignRole($parentRole);
-
-        $student = new User;
-        $student->name = 'Caicedo';
-        $student->email = 'caicedo@gmail.com';
-        $student->password = '12341234';
-        $student->save();
-
-        $student->assignRole($studentRole);
+        $super->assignRole($superRole);
     }
 }

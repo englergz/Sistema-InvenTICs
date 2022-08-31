@@ -19,15 +19,12 @@
         </div>
         @include('posts.owner')
         <footer class="container-flex space-between">
-            @include('partials.social-links', ['description' => $post->title])
-
             @include('posts.tags')
         </footer>
 
         <div class="comments">
             <div class="divider"></div>
             <div id="disqus_thread"></div>
-            @include('partials.disqus-script')
         </div><!-- .comments -->
     </div>
 </article>

@@ -31,6 +31,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_photo_url'
     ];
 
     /**
@@ -66,10 +67,16 @@ class User extends Authenticatable
     /**
      * Search query in multiple whereOr
      */
-    public static function search($query)
+    /*public static function search($query)
     {
         return empty($query) ? static::query()
             : static::where('name', 'like', '%'.$query.'%')
+                ->orWhere('email', 'like', '%'.$query.'%');
+    }*/
+    public static function search($query)
+
+    {
+         return  User::where('name', 'like', '%'.$query.'%')
                 ->orWhere('email', 'like', '%'.$query.'%');
     }
 

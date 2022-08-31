@@ -1,8 +1,8 @@
 <x-guest-layout>
         <div class="lg:flex">
             <div class="lg:w-1/2 xl:max-w-screen-sm">
-                <div class=" w-0-5 py-12  lg:bg-white flex justify-center lg:justify-start lg:px-12">
-                    <img class="w-20 md:w-32 lg:w-40" src="{{ ('/img/logo-liceo.png') }}" alt="Logo">
+                <div class="">
+                    <img  src="{{ ('/img/cabezotemovil.png') }}" alt="Logo">
                     <div class="cursor-pointer flex items-center">
                         <div>
                             <svg class="w-10 text-indigo-500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 225 225" style="enable-background:new 0 0 225 225;" xml:space="preserve">
@@ -13,20 +13,23 @@
                 </div>
                     
                 @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-green-600">
+                    <div class="mb-4 font-medium text-sm text-blue-600">
                         {{ session('status') }}
                     </div>
                 @endif
                 <div class="mt-0 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
-                    <h2 class=" mt-0 text-center text-4xl text-green-800 font-display font-semibold lg:text-left xl:text-5xl
-                    xl:text-bold">Liceo Nacional Max Seidel</h2>
+                    <h2 class=" mt-0 text-center text-4xl text-blue-800 font-display font-semibold lg:text-left xl:text-5xl
+                    xl:text-bold">Sistema InvenTICs</h2>
+                    <h4 class=" mt-0 text-center text-blue-800 font-display font-semibold lg:text-left 
+                    xl:text-bold">Inventario del Departamento TICs</h4>
                     <div class="mt-10">
+                    
                     <x-jet-validation-errors class="mb-4" />
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                             <div>
                                 <div class="text-sm font-bold text-gray-700 tracking-wide">Correo electronico</div>
-                                <input class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-red-500 rounded-full py-3 px-6"
+                                <input class="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-blue-500 rounded-full py-3 px-6"
                                 placeholder="correo@dominio.com" id="email" class="block mt-1 w-full" type="" name="email" :value="old('email')" required autofocus>
                             </div>
                             <div class="mt-8">
@@ -36,12 +39,12 @@
                                     </div>
                                     
                                 </div>
-                                <input  class="rounded-full py-3 px-6 w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-red-500" placeholder="Ingresa tu contraseña"
+                                <input  class="rounded-full py-3 px-6 w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-blue-500" placeholder="Ingresa tu contraseña"
                                 id="password" name="password" required autocomplete="current-password" type="password">
                             </div>
                             <div class="mt-4 text-center">
                                 @if (Route::has('password.request'))
-                                    <a class="text-xs font-display font-semibold text-green-600 hover:text-green-800
+                                    <a class="text-xs font-display font-semibold text-blue-600 hover:text-blue-800
                                     cursor-pointer"  > <!--href="{{ route('password.request') }}"-->
                                             {{ __('¿Olvidaste la contraseña?') }}
                                         </a>
@@ -49,22 +52,22 @@
                             </div>
                             <div class="mt-10">
                             
-                                <button class="bg-red-700 text-gray-100 p-4 w-full rounded-full tracking-wide
-                                font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-red-800
+                                <button style="background: -webkit-linear-gradient(20deg, #01091a, #072f50, #1b1581); hover:#fff"class="bg-blue-700 text-gray-100 p-4 w-full rounded-full tracking-wide
+                                font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-blue-800
                                 shadow-lg">
                                     {{ __('Iniciar Sesión') }}
                                 </button>
                             </div>
                         </form>
                         <div class="mt-4 text-sm font-display font-semibold text-gray-700 text-center">
-                            {{ __('¿No tienes contraseña? ') }}<a class="cursor-pointer text-green-600 hover:text-green-800">
-                            {{ __('Generar contraseña inicial') }}</a></br></br></br>
+                            {{ __('¿No tienes cuenta? ') }}<a class="cursor-pointer text-blue-600 hover:text-blue-800">
+                            {{ __('Comunícate con el Departamento TICs') }}</a></br></br></br>
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="hidden lg:flex items-center justify-center bg-gradient-to-r to-gray-50 via-pink-500 from-red-900    flex-1 min-h-screen">
+            <div style="background: -webkit-linear-gradient(20deg, #01091a, #072f50, #1b1581);" class="hover:scale-110 hidden lg:flex items-center justify-center bg-gradient-to-r flex-1 min-h-screen">
                 <div class="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
                     <svg class="w-5/6 mx-auto" xmlns="http://www.w3.org/2000/svg" id="f080dbb7-9b2b-439b-a118-60b91c514f72" data-name="Layer 1" viewBox="0 0 528.71721 699.76785">
                         <title>Login</title>
@@ -76,6 +79,9 @@
                         <g opacity="0.1">
                         <polygon points="337.217 691 317.217 691 318.217 0 337.217 0 337.217 691" fill="#fff"/>
                         </g>
+                        <!--ffb8b8 tono de piel
+                        2f2e41 zapato y cabello
+                        0203f7 pantalon-->
                         <circle cx="296" cy="348.06342" r="13" opacity="0.1"/>
                         <circle cx="296" cy="346.06342" r="13" fill="#535461"/>
                         <line x1="52.81943" y1="16.10799" x2="52.81943" y2="677.15616" fill="none" stroke="#000" stroke-miterlimit="10" stroke-width="2" opacity="0.1"/>
@@ -88,7 +94,7 @@
                         <path d="M735.8586,266.93948s-13,0-16,18-6,78-6,78-42,55-35,62,15,20,20,18,48-61,48-61Z" transform="translate(-335.6414 -100.11607)" fill="#fff"/>
                         <path d="M735.8586,266.93948s-13,0-16,18-6,78-6,78-42,55-35,62,15,20,20,18,48-61,48-61Z" transform="translate(-335.6414 -100.11607)" opacity="0.1"/>
                         <path d="M775.8586,215.93948s-1,39-13,41-8,15-8,15,39,23,65,0l5-12s-18-13-10-31Z" transform="translate(-335.6414 -100.11607)" fill="#ffb8b8"/>
-                        <path d="M708.8586,455.93948s-59,110-37,144,55,104,60,104,33-14,31-23-32-76-40-82-4-22-3-23,34-54,34-54-1,84,3,97-1,106,4,110,28,11,32,5,16-97,8-118l15-144Z" transform="translate(-335.6414 -100.11607)" fill="#EF4444"/>
+                        <path d="M708.8586,455.93948s-59,110-37,144,55,104,60,104,33-14,31-23-32-76-40-82-4-22-3-23,34-54,34-54-1,84,3,97-1,106,4,110,28,11,32,5,16-97,8-118l15-144Z" transform="translate(-335.6414 -100.11607)" fill="#000"/>
                         <path d="M762.8586,722.93948l-25,46s-36,26-11,30,40-6,40-6l22-16v-46Z" transform="translate(-335.6414 -100.11607)" fill="#2f2e41"/>
                         <path d="M728.8586,696.93948l13,31s5,13,0,16-19,21-10,23a29.29979,29.29979,0,0,0,5.49538.5463,55.56592,55.56592,0,0,0,40.39768-16.43936l8.10694-8.10694s-27.77007-63.94827-27.385-63.47414S728.8586,696.93948,728.8586,696.93948Z" transform="translate(-335.6414 -100.11607)" fill="#2f2e41"/>
                         <circle cx="465.21721" cy="105.82341" r="34" fill="#ffb8b8"/>

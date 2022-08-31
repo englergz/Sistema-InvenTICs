@@ -7,21 +7,21 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title" id="myModalLabel">Título de tu nueva publicación</h4>
+					<h4 class="modal-title" id="myModalLabel">Nombre/Modelo del producto</h4>
 				</div>
 				<div class="modal-body">
 					<div class="form-group {{ $errors->has('title') ? 'has-error' : '' }}">
-						{{-- <label>Título de la publicación</label> --}}
+						{{-- <label>Nombre/Modelo del producto</label> --}}
 						<input id="post-title" name="title"
 						class="form-control"
 						value="{{ old('title') }}"
-						placeholder="Ingresa aquí el título de la publicación" autofocus required>
+						placeholder="Ingresa aquí el Nombre/Modelo del producto" autofocus required>
 						{!! $errors->first('title', '<span class="text-red-600 help-block">:message</span>') !!}
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-					<button class="btn btn-primary">Crear publicación</button>
+					<button class="btn btn-primary">Crear producto</button>
 				</div>
 			</div>
 		</div>

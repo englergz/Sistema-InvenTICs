@@ -7,10 +7,10 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveRoleRequest;
 use Spatie\Permission\Models\Permission;
-use App\Models\Roles;
  
 class RolesController extends Controller
 {
+   
     /**
      * Display a listing of the resource.
      *
@@ -18,15 +18,16 @@ class RolesController extends Controller
      */
     public function index()
     {
-        $this->authorize('view', new Role);
+       // $this->authorize('view', new Roles);
 
-        return view('admin.roles.index', [
+        /*return view('admin.roles.index', [
             'roles' => Role::all()
         ]);
-        /*
+        */
+        
         return view('admin.roles.index', [
-            'roles' => Roles::class
-        ]);*/
+            'roles' => Role::class           
+        ]);
     }
     
 

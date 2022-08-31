@@ -23,16 +23,17 @@ $user = auth()->user();
           </div>
         </div-->
 
-        <li class="dropdown"><a href="#" data-turbolinks="false" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+        <li class="dropdown"><a data-turbolinks="false" class="nav-link dropdown-toggle nav-link-lg nav-link-user"
+        href="{{ route('admin.users.show', auth()->user()) }}">
             @if (!is_null($user))
-            
                 <div class="d-sm-none d-lg-inline-block">
                     Hola, {{ $user->name }}
-                </div></a>
+                </div>
             @else
-                <div class="d-sm-none d-lg-inline-block">Hola, Bienvenido</div></a>
+                <div class="d-sm-none d-lg-inline-block">Hola, Bienvenido</div>
             @endif
-            <div class="dropdown-menu dropdown-menu-right">
+                <i class="fas fa-user"></i></a>
+            <!--div class="dropdown-menu dropdown-menu-right">
                 @can('view', new App\Models\User)
                 <a href="/user/profile" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Cuenta
@@ -51,7 +52,7 @@ $user = auth()->user();
                         <i class="fas fa-sign-out-alt"></i> Cerrar sesión
                     </a>
                 </form>
-            </div>
+            </div-->
         </li>
     </ul>
 </nav>

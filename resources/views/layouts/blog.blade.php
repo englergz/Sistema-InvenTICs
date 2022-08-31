@@ -24,9 +24,10 @@
   <body>
   <div class="preload"></div>
   <header class="space-inter">
-    <div class="container container-flex space-between">
+    <div class="container space-between">
       <figure class="logoHome">
-        <img style="width: 50%;" src="{{ ('/img/logo-liceo.png') }}" alt="logo-liceo">
+        <img style="width: 40%;" src="{{ ('/img/cctumaco.png') }}" alt="logo">
+        
       </figure>
       @include('partials.nav')
     </div>
@@ -37,11 +38,10 @@
   <section class="footer">
   <footer>
     <div class="container">
-      <figure class="logo"><img src="/img/logo-liceo.png" alt=""></figure>
+      <figure class="logo"><img style="width: 40%;" src="/img/cctumaco.png" alt="logo"></figure>
       <nav>
         <ul class="container-flex space-center list-unstyled">
-          <li><a href="{{ route('pages.home') }}" class="c-gris-2 text-uppercase active"><i class="fas fa-home"></i> Inicio</a></li>
-          <li><a href="{{ route('pages.about') }}" class="c-gris-2 text-uppercase"><i class="fas fa-graduation-cap"></i> Acerca de</a></li>
+          <li><a href="{{ route('login') }}" class="c-gris-2 text-uppercase active"><i class="fas fa-home"></i> Inicio</a></li>
           <li><a href="{{ route('pages.archive') }}" class="c-gris-2 text-uppercase"><i class="fas fa-archive"></i> Archivo</a></li>
           <li><a href="{{ route('pages.contact') }}" class="c-gris-2 text-uppercase"><i class="fas fa-envelope"></i> Contacto</a></li>
         </ul>
@@ -51,9 +51,9 @@
         &copy;
         <script>
           document.write(new Date().getFullYear())
-        </script>, ALEN <i class="material-icons">favorite</i> by 
-      <span class="c-white">I. E. Liceo Nacional Max Seidel</span></p>
-      <div class="divider-2" style="width:80%;"></div>
+        </script>, Sistema InvenTICs <i class="material-icons">favorite</i> by 
+      <span class="c-white">Camara de Comercio de Tumaco</span></p>
+      <div class="divider-2" style="width:60%;"></div>
      
     </div>
 </footer>
@@ -79,7 +79,7 @@
           // set timeout so that the panel has a chance to roll up
           // before the menu switches states
           if (menu.classList.contains('open')) {
-              setTimeout(toggleHorizontal, 500);
+              setTimeout(toggleHorizontal, 50);
           }
           else {
               toggleHorizontal();

@@ -25,13 +25,13 @@
                 </ul>
             </div>
             <div class="latest-posts">
-                <h3 class="text-capitalize">Últimas Publicaciones</h3>
+                <h3 class="text-capitalize">Últimas Productos</h3>
 
                 @foreach ($posts as $post)
                     <p><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></p>
                 @endforeach
 
-                <h3 class="text-capitalize">Publicaciones Por Mes</h3>
+                <h3 class="text-capitalize">Productos Por Mes</h3>
                 <ul class="list-unstyled">
                     @foreach ($archive as $date)
                         <li>{{ $date->month }} {{ $date->year }} ({{ $date->posts }})</li>

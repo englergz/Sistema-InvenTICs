@@ -16,10 +16,10 @@ class PostsController extends Controller
 
     public function index()
     {
-        /*$post = Post::allowed()->get();
-        return view('admin.posts.index', compact('post'));*/
+        $posts = Post::allowed()->get();
+        //return view('admin.posts.index', compact('posts'));
         return view('admin.posts.index', [
-            'post' => Post::class
+            'posts' => Post::class
         ]);
     }
 
@@ -63,7 +63,7 @@ class PostsController extends Controller
 
         return redirect()
             ->route('admin.posts.index')
-            ->with('flash', 'La publicación ha sido guardada');
+            ->with('flash', 'El producto ha sido guardada');
     }
 
     public function destroy(Post $post)
@@ -74,6 +74,6 @@ class PostsController extends Controller
 
         return redirect()
             ->route('admin.posts.index')
-            ->with('flash', 'La publicación ha sido eliminada');
+            ->with('flash', 'El producto ha sido eliminada');
     }
 }

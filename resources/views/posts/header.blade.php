@@ -3,9 +3,9 @@
         <span class="c-gris">
             @if($post->published_at)
                 {{ optional($post->published_at)->format('M d') }} - {{ optional($post->published_at)->diffforHumans() }}
-            @else Publicación culta,
+            @else Producto sin responsable,
             <div class="read-more">
-                <span class="post-category"><a style="color:#145A32" href="{{ route('admin.posts.edit', $post) }}"> ¿Publicar ahora?</a></span>
+                <span class="post-category"><a style="color:#1b1581" href="{{ route('admin.posts.edit', $post) }}"> ¿Asignar ahora?</a></span>
             </div>
             @endif
         </span>
