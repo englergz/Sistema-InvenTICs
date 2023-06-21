@@ -1,7 +1,7 @@
 @php
 $auth = auth()->user();
 @endphp
-<div>
+<div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
     <x-data-table :data="$data" :model="$employees">
         <x-slot name="head">
             <tr>
@@ -20,10 +20,6 @@ $auth = auth()->user();
                 <th><a wire:click.prevent="" role="button" href="#">
                     Contacto
                 </a></th>
-                <th><a wire:click.prevent="sortBy('admission_at')" role="button" href="#">
-                    Fecha de ingreso
-                    @include('components.sort-icon', ['field' => 'admission_at'])
-                </a></th>
                 <th>...</th>
             </tr>
         </x-slot>
@@ -36,10 +32,10 @@ $auth = auth()->user();
 						
 						<div class="ml-4">
 							<div class="text-sm font-medium text-gray-900">
-								{{$employee->first_name}}
+								{{$employee->first_name.' '.$employee->second_name}}
 							</div>
                                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                                    <p>{{$employee->surname}}</p>
+                                    <p>{{$employee->surname .' '.$employee->second_surname}}</p>
                                 </span>
 						
 						</div>
@@ -49,11 +45,15 @@ $auth = auth()->user();
 						<div class="flex items-center">
 						
 						<div class="ml-4">
-							<div class="text-sm font-medium text-gray-900">
-								{{$employee->type_id }}{{ $employee->num_id}}
+                            <div class="text-sm font-medium ">
+                                {{$employee->getDocument_id->codigo}}
 							</div>
                             <div class="text-sm font-medium text-gray-900">
-								{{$employee->date_birth}}
+                                {{$employee->getDocument_id->descripcion}}
+							</div>
+                            
+							<div class="text-sm font-medium text-gray-900">
+								 {{ $employee->num_id}}
 							</div>
 						</div>
 						</div>
@@ -90,9 +90,6 @@ $auth = auth()->user();
 						</div>
 						</div>
 					</td>
-                    <td>@isset($employee->admission_at) 
-                            {{ $employee->admission_at->format('d M Y H:i') }}
-                        @endisset</td>
                     <td class="whitespace-no-wrap row-action--icon">
                         @can('view', $employee)
                             <a href="{{ route('admin.employees.show', $employee) }}" role="button" class="mr-3"><i class="fa fa-16px fa-eye"></i></a>
@@ -103,7 +100,7 @@ $auth = auth()->user();
                         @if($auth->getRoleDisplayNames() == 'Administrador')
                             @can('delete', $employee)
                             {{ csrf_field() }} {{ method_field('DELETE') }}
-                                <a role="button" x-on:click.prevent="deleteItem" href="#"><i class="fa fa-16px fa-trash text-red-500"></i></a>
+                                <!--a role="button" x-on:click.prevent="deleteItem" href="#"><i class="fa fa-16px fa-trash text-red-500"></i></a-->
                             @endcan
                         @endif
                     </td>

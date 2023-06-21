@@ -16,14 +16,24 @@ class UsersExport implements FromCollection,WithHeadings
     {
         return [
             'Id',
-            'Nombre',
-            'Email',
+            'Usuario',
+            'Email Usuario',
+            'Nombre 1',
+            'Nombre 2',
+            'Apellido 1',
+            'Apellido 2',
+
+            'Cargo',
+    
+            'Fecha de registro',
         ];
     }
     public function collection()
     {
-         $users = DB::table('Users')->select('id','name', 'email')->get();
-         return $users;
+         $users = DB::table('users')
+         ->join('employees','users.employee_id', '=', 'employees.id')
+         ->select('users.id','name','users.email','first_name','second_name','surname','second_surname','position','users.created_at')->get();
 
+         return $users;
     }
 }

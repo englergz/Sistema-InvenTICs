@@ -38,7 +38,10 @@
                                 value="{{ old('display_name', $permission->display_name) }}"
                                 class="form-control">
                         </div>
-                        <button class="btn btn-primary btn-block">Actualizar permiso</button>
+                        <button class=" col-span-6 sm:col-span-3 form-group btn btn-primary btn-block">Actualizar permiso</button>
+                        <a href="{{ route('admin.permissions.index') }}" class="button">
+							<button type="button"class="col-span-6 sm:col-span-3 form-group btn btn-secondary btn-block" >Cancelar</button>
+						</a>
                     </form>
                  </div>
                 </div>

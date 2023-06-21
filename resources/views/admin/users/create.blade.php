@@ -28,19 +28,25 @@
 
                         <div class="form-group">
                         
-                            <select name="name" class="form-control select2">
+                            <select name="employee_id" id="employee_id" class="form-control">
+                            <option value="" selected="true" disabled="disabled">Seleccione el funcionario</option>
 								@foreach ($employees as $employee)
-									<option value="{{ $employee->first_name }} {{ $employee->surname}}"
-											{{ old('name', $user->employee_id) == $employee->id ? 'selected' : '' }}
-									>{!! $employee->first_name !!} {{$employee->surname}}</option>
+									<option value="{{ $employee->id }}"
+											{{ old('name', $user->employee_id) == $employee->id ? 'selected' : '' }} data-user_id="{{$employee->email}}"
+									>{!! $employee->surname .' '.$employee->second_surname.' '.$employee->first_name.' '.$employee->second_name !!}</option>
 								@endforeach
 							</select>
 							{!! $errors->first('employee_id', '<span class="text-red-600">:message</span>') !!}
                         </div>
 
                         <div class="form-group">
+                            <label for="name">Nombre de usuario</label>
+                            <input name="name"id="name" type="name" value="{{ old('name' ) }}" class="form-control">
+                        </div>
+
+                        <div class="form-group">
                             <label for="email">Correo electronico</label>
-                            <input name="email" value="{{ old('email') }}" class="form-control">
+                            <input name="email"id="email" type="email" value="{{ old('email' ) }}" class="form-control">
                         </div>
 
                         <div class="form-group col-md-6">
@@ -60,4 +66,7 @@
         </div>
     </div>
 </div>
+
+  
+
 </x-app-layout>

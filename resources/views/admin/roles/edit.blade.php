@@ -27,7 +27,10 @@
                             {{ method_field('PUT') }}
 
                             @include('admin.roles.form')
-                            <button class="btn btn-primary btn-block">Actualizar rol</button>
+                            <button class="col-span-6 sm:col-span-3 form-group btn btn-primary btn-block">Actualizar rol</button>
+                            <a href="{{ route('admin.roles.index') }}" class="button">
+							<button type="button"class="col-span-6 sm:col-span-3 form-group btn btn-secondary btn-block" >Cancelar</button>
+							</a>
                         </form>
                     </div>
                 </div>

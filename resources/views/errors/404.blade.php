@@ -5,8 +5,8 @@
         <article class="post">
             <div class="content-post">
 
-                <h1 class="text-capitalize">Página no encontrada</h1>
-                <p>Regresar a <a href="{{ url()->previous()}}">Inicio</a></p>
+                <h1 >Página no encontrada</h1>
+                <p>Regresar a <a class="text-capitalize" href="{{ url('/dashboard')}}">Inicio</a></p>
 
             </div>
         </article>

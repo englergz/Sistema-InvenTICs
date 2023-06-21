@@ -25,4 +25,10 @@ class Tag extends Model
     	$this->attributes['name'] = $name;
     	$this->attributes['url'] = Str::slug($name);
     }
+
+    public static function search($query)
+    {
+         return  Tag::where('url', 'like', '%'.$query.'%')
+                ->orWhere('name', 'like', '%'.$query.'%');
+    }
 }

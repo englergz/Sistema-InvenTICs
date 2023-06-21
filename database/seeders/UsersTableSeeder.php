@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Employee;
+use App\Models\DocumentID;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -21,27 +22,33 @@ class UsersTableSeeder extends Seeder
         Role::truncate();
         User::truncate();
         Employee::truncate();
+        DocumentID::truncate();
 
         $adminRole = Role::create(['name' => 'Admin', 'display_name' => 'Administrador']);
         $superRole = Role::create(['name' => 'Supervisor', 'display_name' => 'Supervisor']);
         Role::create(['name' => 'Funcionario', 'display_name' => 'Funcionario']);
-//Producto
-        $viewPostsPermission = Permission::create([
-            'name' => 'Ver productos',
-            'display_name' => 'Ver productos'
-        ]);
-        $createPostsPermission = Permission::create([
-            'name' => 'Crear productos',
-            'display_name' => 'Crear productos'
-        ]);
-        $updatePostsPermission = Permission::create([
-            'name' => 'Actualizar productos',
-            'display_name' => 'Actualizar productos'
-        ]);
-        $deletePostsPermission = Permission::create([
-            'name' => 'Eliminar productos',
-            'display_name' => 'Eliminar productos'
-        ]);
+
+        $document = new documentID;
+        $document->codigo = "CC";
+        $document->descripcion = "Cédula de cuidadanía";
+        $document->save();
+
+        $document = new documentID;
+        $document->codigo = "CE";
+        $document->descripcion = "Cédula de Extranjería";
+        $document->save();
+
+        $document = new documentID;
+        $document->codigo = "NIP";
+        $document->descripcion = "Número de identificación personal";
+        $document->save();
+
+        $document = new documentID;
+        $document->codigo = "TI";
+        $document->descripcion = "Tarjeta de identidad";
+        $document->save();
+
+
 //Cuenta
         $viewUsersPermission = Permission::create([
             'name' => 'Ver usuarios',
@@ -102,10 +109,27 @@ class UsersTableSeeder extends Seeder
             'name' => 'Actualizar permisos',
             'display_name' => 'Actualizar permisos'
         ]);
+//Producto
+        $viewPostsPermission = Permission::create([
+            'name' => 'Ver productos',
+            'display_name' => 'Ver productos, préstamos, categorias, etiquetas y más'
+        ]);
+        $createPostsPermission = Permission::create([
+            'name' => 'Crear productos',
+            'display_name' => 'Crear productos, préstamos, categorias, etiquetas y más'
+        ]);
+        $updatePostsPermission = Permission::create([
+            'name' => 'Actualizar productos',
+            'display_name' => 'Actualizar productos, préstamos, categorias, etiquetas y más' 
+        ]);
+        $deletePostsPermission = Permission::create([
+            'name' => 'Eliminar productos',
+            'display_name' => 'Eliminar productos, préstamos, categorias, etiquetas y más'
+        ]);
 
 //crear empleado        
         $empleado = new Employee;
-        $empleado->type_id ='CC';
+        $empleado->document_id = 1;
         $empleado->num_id = '1087000113';
         $empleado->first_name = 'Jose';
         $empleado->second_name = 'Eduardo';
@@ -120,7 +144,7 @@ class UsersTableSeeder extends Seeder
         $empleado->save();
 
         $empleado = new Employee;
-        $empleado->type_id ='CC';
+        $empleado->document_id = 1;
         $empleado->num_id = '1087888113';
         $empleado->first_name = 'Luis';
         $empleado->second_name = 'Felipe';
@@ -135,7 +159,7 @@ class UsersTableSeeder extends Seeder
         $empleado->save();
 
         $empleado = new Employee;
-        $empleado->type_id ='CC';
+        $empleado->document_id = 1;
         $empleado->num_id = '1087000777';
         $empleado->first_name = 'Cristian';
         $empleado->second_name = 'Eduardo';
@@ -150,7 +174,7 @@ class UsersTableSeeder extends Seeder
         $empleado->save();
 
         $empleado = new Employee;
-        $empleado->type_id ='CC';
+        $empleado->document_id = 1;
         $empleado->num_id = '1087000222';
         $empleado->first_name = 'Carmen';
         $empleado->second_name = 'America';
@@ -176,7 +200,7 @@ class UsersTableSeeder extends Seeder
         $admin->assignRole($adminRole);
 
         $super = new User;
-        $admin->employee_id = 2;
+        $super->employee_id = 2;
         $super->name = 'Luis Quintero';
         $super->email = 'luis@gmail.com';
         $super->password = '12341234';
@@ -185,14 +209,14 @@ class UsersTableSeeder extends Seeder
         $super->assignRole($superRole);
 
         $funcionario = new User;
-        $admin->employee_id = 3;
+        $funcionario->employee_id = 3;
         $funcionario->name = 'Cristian Cortes';
         $funcionario->email = 'cortes@gmail.com';
         $funcionario->password = '12341234';
         $funcionario->save();
 
         $super = new User;
-        $admin->employee_id = 4;
+        $super->employee_id = 4;
         $super->name = 'Carmen Hurtado';
         $super->email = 'carmen@gmail.com';
         $super->password = '12341234';

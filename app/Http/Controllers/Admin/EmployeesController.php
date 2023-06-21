@@ -4,20 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Models\User;
+use App\Models\Post;
 use App\Models\Employee;
+use App\Models\DocumentID;
 
-use App\Exports\employeesExport;
+use App\Exports\EmployeesExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-
+use Carbon\Carbon;
 use App\Events\UserWasCreated;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\UpdateUserRequest;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+
+use Illuminate\Validation\Rule;
 
 class EmployeesController extends Controller
 {
@@ -28,12 +33,23 @@ class EmployeesController extends Controller
      */
     public function index()
     {
-        //$employees = Employee::get();
 
-        //return view('admin.employees.index', compact('employees'));
         return view('admin.employees.index', [
-            'employees' => Employee::class
+            'employees' => Employee::class,
         ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user, Employee $employee)
+    {
+        $this->authorize('view', $employee);
+
+        return view('admin.employees.show', compact('user','employee'));
     }
 
     /**
@@ -43,11 +59,13 @@ class EmployeesController extends Controller
      */
     public function create()
     {
-        $employee = new employee;
+        $this->authorize('create', new Employee);
+        $now = Carbon::now();
 
-        $this->authorize('create', $employee);
-
-        return view('admin.employees.create', compact('employee'));
+        return view('admin.employees.create', [
+            'date' => $now->format('Y-m-d'),
+            'documentz' => DocumentID::all(),
+        ]);
     }
 
     /**
@@ -58,27 +76,43 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        $employee = new employee;
-        $this->authorize('create', $employee);
-        $post = employee::create( $request->all() );
-        $post->save();
+        $employee = Employee::find($request->get('employee'));
+        if(!is_null($employee)){
 
-        return redirect()->route('admin.employees.index')->withFlash('El contratista ha sido creado');
+            $this->validate($request, [
+                'employee' => 'required'
+            ]);
+
+            return redirect()
+            ->route('admin.employees.show', $employee)
+            ->withFlash('Gestiona los productos e información del empleado '
+            .$employee->first_name.' '.$employee->second_name.' '
+            .$employee->surname .' '.$employee->second_surname.' '
+            .' ');
+        }else{
+
+            $this->authorize('create', new employee);
+            $this->$request->validate([
+                'surname' => 'required|max:64|min:3',
+                'email' => 'required|email|max:64|unique:employees',
+                'document_id' => 'required',
+                'num_id' => 'required|min:6|max:16|unique:employees',
+                'first_name' => 'required|max:64|min:3',
+                'profession'  => 'required|max:64|min:3',
+                'process'  => 'required|max:64|min:3',
+                'position'  => 'required|max:64|min:3',
+                'phone'  => 'required|min:6|max:16',
+                'address' => 'required|min:6|max:256',
+            ]);
+
+            $employee = employee::create( $request->all() );
+            $employee->save();
+
+            return redirect()->route('admin.employees.index')->withFlash('El empleado ha sido creado');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(employee $employee)
-    {
-        $this->authorize('view', $employee);
-
-        return view('admin.employees.show', compact('employee'));
-    }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -89,46 +123,71 @@ class EmployeesController extends Controller
     {
         $this->authorize('update', $employee);
 
-        $roles = Role::with('permissions')->get();
-        $permissions = Permission::pluck('name', 'id');
+        $now = Carbon::now();
 
-        return view('admin.employees.edit', compact('employee'));
+        return view('admin.employees.edit', [
+            'date' => $date = $now->format('Y-m-d'),
+            'documentz' => DocumentID::all(),
+            'employee' => $employee,
+        ]);
       
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateUserRequest $request, employee $employee)
+    
+    public function update(Request $request, employee $employee)
     {
-        $this->authorize('update', $employee);
+        
+            $this->authorize('update', $employee);
 
-        $employee->update( $request->validated() );
-
-        /*return redirect()->route('admin.employees.edit', $employee)->withFlash('Usuario actualizado');*/
-        return redirect()->route('admin.employees.show', $employee )->withFlash('Usuario actualizado');
+            $data = $request->validate([
+                'surname' => 'required|max:64|min:3',
+                'document_id' => 'required',
+                'first_name' => 'required|max:64|min:3',
+                'profession'  => 'required|max:64|min:3',
+                'process'  => 'required|max:64|min:3',
+                'position'  => 'required|max:64|min:3',
+                'phone'  => 'required|min:6|max:16',
+                'address' => 'required|min:6|max:256',
+                'num_id' => Rule::unique('employees')->ignore($employee->id),
+                'email' => Rule::unique('employees')->ignore($employee->id)
+            ]);
+    
+            
+            $employee->update($request->all());
+            
+            $employee->save();
+    
+           // $employee->update($data);
+            return redirect()->route('admin.employees.index', $employee )->withFlash('Usuario actualizado');
+        
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(employee $employee)
-    {
-        $this->authorize('delete', $employee);
-
-        $employee->delete();
-
-        return redirect()->route('admin.employees.index')->withFlash('Usuario eliminado');
-    }
 
     public function export(){
-        return Excel::download(new employeesExport, 'employees.xlsx');
+        return Excel::download(new EmployeesExport, 'Employees.xlsx');
     }
+
+    public function destroy(Post $post)
+    {
+        write_to_console($post);
+        $p = Post::find($post);
+
+        write_to_console("Hello World!");
+
+        $p->employee_debtor_since = Carbon::make(null);
+        $p->employee_id = null;
+        $p->update($request->all());
+        $p->save();
+            
+    }
+
+    
+    public function write_to_console($data) {
+    $console = $data;
+    if (is_array($console))
+    $console = implode(',', $console);
+   
+    echo "<script>console.log('Console: " . $console . "' );</script>";
+   }
+  
 }

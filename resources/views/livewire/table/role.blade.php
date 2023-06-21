@@ -1,4 +1,4 @@
-<div>
+<div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
     <x-data-table :data="$data" :model="$roles">
         <x-slot name="head">
             <tr>
@@ -59,11 +59,12 @@
                     <td class="whitespace-no-wrap row-action--icon">
                       
                                 <a role="button" href="{{ route('admin.roles.edit', $role) }}" class="mr-3"><i class="fa fa-16px fa-pencil"></i></a>
-                        
+                        @can('delete', $role)
                             @if ($role->id > 2 )
                                 {{ csrf_field() }} {{ method_field('DELETE') }}
                                 <a role="button" x-on:click.prevent="deleteItem" href="#"><i class="fa fa-16px fa-trash text-red-500"></i></a>
                             @endif
+                        @endcan
                     </td>
                 </tr>
             @endforeach

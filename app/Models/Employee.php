@@ -4,21 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Hash;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Sanctum\HasApiTokens;
 
 class Employee extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'type_id',
+        'document_id',
         'num_id',
         'first_name',
         'second_name',
@@ -30,7 +25,8 @@ class Employee extends Model
         'email',
         'phone',
         'address',
-        'admission_at'
+        'admission_at',
+        'user_id'
     ];
 
     public static function search($query)
@@ -38,6 +34,36 @@ class Employee extends Model
     {
          return Employee::where('first_name', 'like', '%'.$query.'%')
                 ->orWhere('email', 'like', '%'.$query.'%');
+    }
+    
+    public function getDocument_id()
+    {
+    	return $this->belongsTo(DocumentID::class,'document_id');
+    } 
+
+    public function user()
+    {
+    	return $this->hasMany(user::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function logHistory()
+    {
+        return $this->hasMany(logHistory::class);
+    }
+
+    public function scopeAllowed($query)
+    {
+        if( auth()->user()->can('view', $this) )
+        {
+            return $query;
+        }
+
+        return $query->where('id', auth()->id());
     }
     
 }

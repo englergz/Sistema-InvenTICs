@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 use App\Models\Permissions;
 
+use App\Exports\PermissionsExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class PermissionsController extends Controller
 {
     public function index()
@@ -38,7 +41,11 @@ class PermissionsController extends Controller
 
         $permission->update($data);
 
-        return redirect()->route('admin.permissions.edit', $permission)->withFlash('El permiso ha sido actualizado');
+        return redirect()->route('admin.permissions.index', $permission)->withFlash('El permiso ha sido actualizado');
+    }
+
+    public function export(){
+        return Excel::download(new PermissionsExport, 'Permissions.xlsx');
     }
     
 }

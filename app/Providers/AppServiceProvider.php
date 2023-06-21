@@ -16,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        if ( app()->environment('production') )
+        {
+           // include base_path('demo.php');
+        }
     }
 
     /**

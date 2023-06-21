@@ -1,30 +1,22 @@
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        @foreach ($post->photos as $photo)
-            <li data-target="#carousel-example-generic" 
-                data-slide-to="{{ $loop->index }}" 
-                class="{{ $loop->first ? 'active' : ''}}">
-            </li>
-        @endforeach
-    </ol>
+@php
+    $c = 0;
+@endphp
+<div class="gallery-photos" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 464 }'>
+    @foreach($post->photos as $photo)
+    @if( pathinfo($photo->url, PATHINFO_EXTENSION) != 'pdf' )
+        <figure class="grid-item grid-item--height2   {{ $c = $c + 1 }}">
+          
+            @if($c === 4)
+                <a href="{{ route('posts.show', $post) }}" class=" overlay c-green">+{{ $post->photos->count() - 3 }}</a>
+                @break
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-        @foreach ($post->photos as $photo)
-            <div class="item {{ $loop->first ? 'active' : ''}}">
-                <img src="{{ url($photo->url) }}">
-            </div>
-        @endforeach
-    </div>
-
-    <!-- Controls -->
-    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+            @endif
+            <img src="{{ url('storage/'.$photo->url) }}" class="img-responsive" alt="{{ url('storage/'.$photo->url) }}">
+        </figure>
+        @if ($photo->number == 5)
+       
+        @endif
+        
+    @endif
+    @endforeach
 </div>

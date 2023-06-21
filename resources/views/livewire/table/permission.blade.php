@@ -1,4 +1,4 @@
-<div>
+<div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
     <x-data-table :data="$data" :model="$permissions">
         <x-slot name="head">
             <tr>

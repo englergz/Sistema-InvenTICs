@@ -6,8 +6,8 @@
     <ul class="container list-unstyled" >
         <li class="pure-menu-item">
             <a href="{{ route('dashboard') }}"
-                class="pure-menu-link c-gris-2 text-uppercase"><i class="fas fa-chart-bar"></i>
-                Dashboard
+                class="pure-menu-link c-gris-2 "><i class="fas fa-chart-bar"></i>
+                {{ '   Sistema InvenTICs' }} 
             </a>
         </li>
 

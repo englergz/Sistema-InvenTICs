@@ -30,7 +30,7 @@ use Carbon\Carbon;
                                 <div class="ml-3 items-center">
                                     <button class=" items-center max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu" aria-haspopup="true">
                                     <span class="sr-only">Usuario</span>
-                                    <img class="items-center h-18 w-18 rounded-full" src="{{ $user->profile_photo_url}}" alt="{{ $user->name}}">
+                                    <img class="img-responsive items-center h-18 w-18 rounded-full" src="{{ $user->profile_photo_url}}" alt="{{ $user->name}}">
                                     </button>
                                 </div>
                             </div>
@@ -39,10 +39,21 @@ use Carbon\Carbon;
                         <p class="text-muted text-center">{{ $user->getRoleNames()->implode(', ') }}</p>
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
+                            <b>Cuenta pertenece a </b> 
+                                    <a class="pull-right" href="{{ route('admin.employees.show', $user->employee) }}" target="_blank">
+                                        <strong> {{$user->employee->surname .' '.$user->employee->second_surname.' '.
+                                            $user->employee->first_name.' '.$user->employee->second_name}}</strong>
+                                    </a>
+                                    <small class="pull-right text-muted"> Registrado el {{ $user->employee->created_at->format('d/m/Y H:i A').'  ' }}</small>
+                            </li>
+                            <li class="list-group-item">
                             <b>Correo electronico</b> <a class="pull-right">{{ $user->email }}</a>
                             </li>
                             <li class="list-group-item">
-                            <b>Productos</b> <a class="pull-right">{{ $user->posts->count() }}</a>
+                            <b>Productos registrados en inventario</b> <a class="pull-right">{{ $user->posts->count() }}</a>
+                            </li>
+                            <li class="list-group-item">
+                            <b>Productos prestados</b> <a class="pull-right">{{ $user->employee->posts->count() }}</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Roles</b> 
@@ -88,9 +99,9 @@ use Carbon\Carbon;
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
                 <div class="px-4 sm:px-0">
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Productos</h3>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Productos registrados</h3>
                     <p class="mt-1 text-sm text-gray-600">
-                        Estas son todas los productos a responsabilidad de este usuario.
+                        Estos son todas los productos registrados en inventario por este usuario.
                     </p>
                 </div>
             </div>
@@ -104,20 +115,20 @@ use Carbon\Carbon;
                                 <strong>{{ $post->title }}</strong>
                             </a>
                             <br>
-                            @if($post->published_at)
-                                @if($post->published_at > Carbon::now() )
-                                <small class="text-muted">¡Se publicará</small>
+                            @if($post->employee_debtor_since)
+                                @if($post->employee_debtor_since > Carbon::now() )
+                                <small class="text-muted">¡Se prestará el</small>
                                     <span class=" px-2 inline-flex text-xs leading-5 font-semibold rounded-full  bg-blue-100">
-                                    {{ $post->published_at->diffforHumans() }}!</span>
+                                    {{ $post->employee_debtor_since->diffforHumans() }}!</span>
                                 @else
-                                    <small class="text-muted">Publicado el {{ $post->published_at->format('d/m/Y H:i A') }}</small>
+                                    <small class="text-muted">Prestado el {{ $post->employee_debtor_since->format('d/m/Y H:i A') }}</small>
                                     <!--p class="text-muted">{{ $post->body }}-->
                                 @endif
                             @else
-                                <small class="text-muted">Oculta,</small>
+                                <small class="text-muted">Disponible,</small>
                                 <span class=" ">
                                 <a class=" px-2 inline-flex text-xs leading-5 font-semibold rounded-full  bg-blue-100 text-xs text-gray-500" 
-                                href="{{ route('admin.posts.edit', $post) }}">¿Publicar ahora?</a></span>
+                                href="{{ route('admin.posts.edit', $post) }}">¿Prestar ahora?</a></span>
                             @endif
 
                             
@@ -126,12 +137,60 @@ use Carbon\Carbon;
                             @endunless
                             </div>
                         @empty
-                            <small class="text-muted">No tiene ninguna producto</small>
+                            <small class="text-muted">No ha registrado ningun producto</small>
                         @endforelse
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="md:col-span-1">
+                <div class="px-4 sm:px-0">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Productos prestados</h3>
+                    <p class="mt-1 text-sm text-gray-600">
+                        Estas son todas los productos a responsabilidad de este usuario.
+                    </p>
+                </div>
+            </div>
+            <div class="mb-4 md:mt-0 md:col-span-2">
+                <div class="shadow sm:rounded-md sm:overflow-hidden">
+                    <div class="px-4 py-5 bg-white space-y-6 sm:p-6">   
+                        <div class="col-md-12 ">
+                        @forelse ($user->employee->posts as $post)
+                        <div class="mt-4">
+                            <a class="" href="{{ route('posts.show', $post) }}" target="_blank">
+                                <strong>{{ $post->title }}</strong>
+                            </a>
+                            <br>
+                            @if($post->employee_debtor_since)
+                                @if($post->employee_debtor_since > Carbon::now() )
+                                <small class="text-muted">¡Se prestará el</small>
+                                    <span class=" px-2 inline-flex text-xs leading-5 font-semibold rounded-full  bg-blue-100">
+                                    {{ $post->employee_debtor_since->diffforHumans() }}!</span>
+                                @else
+                                    <small class="text-muted">Prestado el {{ $post->employee_debtor_since->format('d/m/Y H:i A') }}</small>
+                                    <!--p class="text-muted">{{ $post->body }}-->
+                                @endif
+                            @else
+                                <small class="text-muted">Disponible,</small>
+                                <span class=" ">
+                                <a class=" px-2 inline-flex text-xs leading-5 font-semibold rounded-full  bg-blue-100 text-xs text-gray-500" 
+                                href="{{ route('admin.posts.edit', $post) }}">¿Prestar ahora?</a></span>
+                            @endif
+
+                            
+                            @unless ($loop->last)
+                                <hr>
+                            @endunless
+                            </div>
+                        @empty
+                            <small class="text-muted">No tiene ningún producto a su responsabilidad</small>
+                        @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>                 
 </x-app-layout>

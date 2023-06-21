@@ -31,7 +31,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'profile_photo_url'
+        'profile_photo_url',
+        'employee_id'
     ];
 
     /**
@@ -88,6 +89,12 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+    
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
+    	
     }
 
     public function scopeAllowed($query)

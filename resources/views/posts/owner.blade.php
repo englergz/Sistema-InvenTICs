@@ -1,7 +1,7 @@
 <header class="container-flex space-between">
     <div class="date">
         <span class="c-gris">
-            By. {{ $post->owner->getRoleDisplayNames() }} • {{ $post->owner->name }}.
+        {{ 'Registrado en inventario por el usuario:   '.$post->owner->name.' • '. $post->owner->getRoleDisplayNames()}}.
         </span>
     </div>
 </header>

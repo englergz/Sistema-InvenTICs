@@ -7,7 +7,10 @@ use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SaveRoleRequest;
 use Spatie\Permission\Models\Permission;
- 
+
+use App\Exports\RolesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class RolesController extends Controller
 {
    
@@ -102,7 +105,7 @@ class RolesController extends Controller
             $role->givePermissionTo($request->permissions);
         }
 
-        return redirect()->route('admin.roles.edit', $role)->withFlash('El role fue actualizado correctamente');
+        return redirect()->route('admin.roles.index', $role)->withFlash('El role fue actualizado correctamente');
     }
 
     /**
@@ -118,5 +121,9 @@ class RolesController extends Controller
         $role->delete();
 
         return redirect()->route('admin.roles.index')->withFlash('El role fue eliminado');
+    }
+
+    public function export(){
+        return Excel::download(new RolesExport, 'Roles.xlsx');
     }
 }

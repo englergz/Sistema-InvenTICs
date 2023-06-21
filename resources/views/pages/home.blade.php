@@ -10,9 +10,15 @@
     <article class="post">
 
         @include( $post->viewType('home') )
-
         <div class="content-post">
-
+        @foreach($post->photos as $photo)
+                @if( pathinfo($photo->url, PATHINFO_EXTENSION) == 'pdf' )
+                    <span class="post-category" style="color:#1b1581">
+                            Contiene archivo(s) en PDF
+                    </span>
+                    @break
+                @endif
+                @endforeach
             @include('posts.header')
 
             <h1>{{ $post->title }}</h1>
@@ -43,8 +49,9 @@
 
         </div>
     </article>
+    </section>
 @endforelse
-</section>
+
     <div class="container text-center list-unstyled c-gris-2 text-uppercase">
             {{ $posts->appends(request()->all())->links() }}
     </div>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -9,13 +10,17 @@
             {{ $meta }}
         @endisset
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="shortcut icon" type="image/png" href="{{ asset('/img/logo.jpg') }}">
+        <link rel="shortcut icon" sizes="192x192" href="{{ asset('/img/logo.jpg') }}">
         <!-- Styles -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans&family=Nunito:wght@400;600;700&family=Open+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="{{ asset('vendor/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/tailwind.css') }}">
         <link rel="stylesheet" href="{{ asset('stisla/css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('stisla/css/components.css') }}">
+        
         <link rel="stylesheet" href="{{ asset('vendor/notyf/notyf.min.css') }}">
+
         <link lel="stylesheet" href="{{ asset('vendor/select2/select2.min.css') }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
@@ -24,6 +29,11 @@
         <link rel="stylesheet" href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+
+       
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    
         @stack('styles')
         <livewire:styles />
     </head>
@@ -49,7 +59,6 @@
                                 <div class="alert alert-success">{{ session('flash') }}</div>
                             @endif
 
-                            @yield('content')
                         </section>
 
                       <div class="section-body">
@@ -73,6 +82,7 @@
         <script defer src="{{ asset('vendor/notyf/notyf.min.js') }}"></script>
         <script defer src="{{ asset('vendor/sweetalert/sweetalert.min.js') }}"></script>
         <script defer src="{{ asset('stisla/js/modules/chart.min.js') }}"></script>
+        <script defer src="{{ asset('stisla/js/modules/moment.min.js') }}"></script>
         <script defer src="{{ asset('vendor/select2/select2.min.js') }}"></script>
 
         <script src="{{ asset('stisla/js/stisla.js') }}"></script>
@@ -81,10 +91,14 @@
         <livewire:scripts />
         <script src="{{ mix('js/app.js') }}" defer></script>
 
-        @unless(request()->is('posts/*'))
-            @include('admin.posts.create')
-        @endunless
 
+        @unless(request()->is('posts/*'))
+            @include('admin.posts.create') 
+            @include('admin.posts.debtor') 
+            @include('admin.posts.receives') 
+            @include('admin.posts.confirmar') 
+        @endunless
+        
         @stack('scripts')
     </body>
 </html>

@@ -12,10 +12,10 @@ use Illuminate\Support\Str;
 class Post extends Model
 {
 	protected $fillable = [
-        'marca','title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id', 'user_id'
+        'id','trademark_id','serial','title', 'body', 'iframe', 'excerpt', 'published_at', 'category_id', 'user_id', 'employee_id', 'employee_debtor_since',
     ];
 
-    protected $dates = ['published_at'];
+    protected $dates = ['published_at','employee_debtor_since'];
 
     protected static function boot()
     {
@@ -32,9 +32,14 @@ class Post extends Model
         return 'url';
     }
 
+    public function getTrademark()
+    {
+    	return $this->belongsTo(trademark::class, 'trademark_id');
+    }
+
     public function category()
     {
-    	return $this->belongsTo(Category::class);
+    	return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function tags()
@@ -46,10 +51,24 @@ class Post extends Model
     {
         return $this->hasMany(Photo::class);
     }
+    public function logHistory()
+    {
+        return $this->hasMany(logHistory::class);
+    }
+
+    public function actaPdf()
+    {
+        return $this->hasMany(ActaPdf::class);
+    }
 
     public function owner()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function employeeDebtor()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
     }
 
     public function scopePublished($query)
@@ -136,7 +155,7 @@ class Post extends Model
        if ($this->photos->count() === 1):
            return 'posts.photo';
        elseif($this->photos->count() > 1):
-           return $home === 'home' ? 'posts.carousel-preview': 'posts.carousel';
+           return $home === 'home' ? 'posts.carousel': 'posts.carousel-preview';
        elseif($this->iframe):
            return 'posts.iframe';
        else:
@@ -160,7 +179,9 @@ class Post extends Model
     public static function search($query)
     {
          return  Post::where('title', 'like', '%'.$query.'%')
-                ->orWhere('body', 'like', '%'.$query.'%');
+                ->orWhere('serial', 'like', '%'.$query.'%')
+                ->orWhere('body', 'like', '%'.$query.'%')
+                ->orWhere('url', 'like', '%'.$query.'%');
     }
 
     public function getCreatedAtAttribute($date)

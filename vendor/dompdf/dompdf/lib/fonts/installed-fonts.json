@@ -1,0 +1,7 @@
+{
+    "nunito": {
+        "normal": "D:\\Server\\laragon\\www\\Sistema-InvenTICs\\vendor\\dompdf\\dompdf\/lib\/fonts\/nunito_normal_586f3f8a461df5c8635a870033365d5e",
+        "600": "D:\\Server\\laragon\\www\\Sistema-InvenTICs\\vendor\\dompdf\\dompdf\/lib\/fonts\/nunito_600_20ff5cd6c5269dcc48ef3e7c73cd0a00",
+        "bold": "nunito_bold_ea226530427d2573f837779baf2817af"
+    }
+}

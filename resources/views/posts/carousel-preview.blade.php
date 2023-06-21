@@ -1,10 +1,25 @@
-<div class="gallery-photos" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 464 }'>
-    @foreach($post->photos->take(4) as $photo)
-        <figure class="grid-item grid-item--height2">
-            @if($loop->iteration === 4)
-                <div class="overlay">{{ $post->photos->count() }} Fotos</div>
-            @endif
-            <img src="{{ url($photo->url) }}" class="img-responsive" alt="">
-        </figure>
+
+    @foreach($post->photos as $photo)
+    @if(pathinfo($photo->url, PATHINFO_EXTENSION) != 'pdf')
+            <center>
+            <h2 style="color: green">FOTO</h2>
+            <h6>{{$photo->created_at}}</h6>
+            <img src="{{ url('storage/'.$photo->url) }}" class="img-responsive" alt="{{ url('storage/'.$photo->url) }}">
+            </center>
+
+    @endif
     @endforeach
-</div>
+
+    @foreach($post->photos as $photo)
+    @if(pathinfo($photo->url, PATHINFO_EXTENSION) == 'pdf')
+        <center>
+        <h2 style="color: green">PDF</h2>
+        <h6>{{$photo->created_at}}</h6>
+        <object data=
+                {{ url('storage/'.$photo->url) }} 
+                width="100%" 
+                height="500"> 
+        </object>
+        </center>
+    @endif
+    @endforeach

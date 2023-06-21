@@ -46,7 +46,7 @@
                                 @if (Route::has('password.request'))
                                     <a class="text-xs font-display font-semibold text-blue-600 hover:text-blue-800
                                     cursor-pointer"  > <!--href="{{ route('password.request') }}"-->
-                                            {{ __('¿Olvidaste la contraseña?') }}
+                                            <!--{{ __('¿Olvidaste la contraseña?') }}-->
                                         </a>
                                 @endif
                             </div>
@@ -60,7 +60,7 @@
                             </div>
                         </form>
                         <div class="mt-4 text-sm font-display font-semibold text-gray-700 text-center">
-                            {{ __('¿No tienes cuenta? ') }}<a class="cursor-pointer text-blue-600 hover:text-blue-800">
+                            {{ __('¿No tienes cuenta? ') }} {{ __('¿Olvidaste la contraseña?') }}<a class="cursor-pointer text-blue-600 hover:text-blue-800">
                             {{ __('Comunícate con el Departamento TICs') }}</a></br></br></br>
                         </div>
                     </div>

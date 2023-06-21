@@ -45,7 +45,7 @@ class Main extends Component
                         'href' => [
                             'create_new' => route('admin.employees.create'),
                             'create_new_text' => 'Registrar empleado',
-                            'export' => '/employees/exportar',
+                            'export' => 'employees/exportar',
                             'export_text' => 'Exportar'
                         ]
                     ])
@@ -82,7 +82,7 @@ class Main extends Component
                         'href' => [
                             'create_new' => route('admin.posts.store', '#create'),
                             'create_new_text' => 'Crear producto',
-                            'export' => '#',
+                            'export' => '/posts/exportar',
                             'export_text' => 'Exportar'
                         ]
                     ])
@@ -99,7 +99,7 @@ class Main extends Component
                         'href' => [
                             'create_new' => route('admin.roles.create'),
                             'create_new_text' => 'Crear rol',
-                            'export' => '#',
+                            'export' => '/roles/exportar',
                             'export_text' => 'Exportar'
                         ]
                     ])
@@ -118,7 +118,64 @@ class Main extends Component
                         'href' => [
                             'create_new' => '#',
                             'create_new_text' => '',
-                            'export' => '#',
+                            'export' => '/permissions/exportar',
+                            'export_text' => 'Exportar'
+                        ]
+                    ])
+                ];
+                break;
+
+            case 'trademark':
+                $trademarks = $this->model::search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+
+                return [
+                    "view" => 'livewire.table.trademark',
+                    "trademarks" => $trademarks,
+                    "data" => array_to_object([
+                        'href' => [
+                            'create_new' => route('admin.trademarks.create'),
+                            'create_new_text' => 'Crear marca comercial',
+                            'export' => 'trademarks/exportar',
+                            'export_text' => 'Exportar'
+                        ]
+                    ])
+                ];
+                    break;
+
+            case 'category':
+                $categories = $this->model::search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+
+                return [
+                    "view" => 'livewire.table.category',
+                    "categories" => $categories,
+                    "data" => array_to_object([
+                        'href' => [
+                            'create_new' => route('admin.categories.create'),
+                            'create_new_text' => 'Crear categoría',
+                            'export' => 'categories/exportar',
+                            'export_text' => 'Exportar'
+                        ]
+                    ])
+                ];
+                break;
+
+            case 'tag':
+                $tags = $this->model::search($this->search)
+                    ->orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+
+                return [
+                    "view" => 'livewire.table.tag',
+                    "tags" => $tags,
+                    "data" => array_to_object([
+                        'href' => [
+                            'create_new' => route('admin.tag.create'),
+                            'create_new_text' => 'Crear etiqueta',
+                            'export' => 'tag/exportar',
                             'export_text' => 'Exportar'
                         ]
                     ])

@@ -26,7 +26,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::get();
+        //$users = User::get();
 
         //return view('admin.users.index', compact('users'));
         return view('admin.users.user-data', [
@@ -63,12 +63,12 @@ class UsersController extends Controller
         $this->authorize('create', new User);
 
         $data = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'name' => 'required|max:32',
+            'email' => 'required|email|max:64|unique:users',
+            'employee_id' => 'required'
         ]);
 
         $data['password'] = "12341234";
-        $data['employee_id'] = 'employee';
         $user = User::create($data);
 
         if($request->filled('roles'))
@@ -90,11 +90,15 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(User $user, Employee $employee)
     {
         $this->authorize('view', $user);
+        $this->authorize('view', $employee);
 
-        return view('admin.users.show', compact('user'));
+        return view('admin.users.show', [
+            'employee' => $employee,
+            'user' => $user,
+        ]);
     }
 
     /**

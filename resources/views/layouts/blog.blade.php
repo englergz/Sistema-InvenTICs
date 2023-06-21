@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>@yield('meta-title', config('app.name') . " ")</title>
-    <link href="/css/normalize.css" rel="stylesheet">
-    <link href="/css/framework.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="/css/responsive.css" rel="stylesheet">
+    <link href="{{ asset('css/normalize.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/framework.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/responsive.css') }}" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,28 +33,34 @@
       @include('partials.nav')
     </div>
   </header>
-
+  
   @yield('content')
 
   <section class="footer">
-  <footer>
+  <footer id="footer" style="position: fixed; bottom: 1x; width: 100%; height: 30px;">
     <div class="container">
-      <figure class="logo"><img style="width: 40%;" src="/img/cctumaco.png" alt="logo"></figure>
+      <!--figure class="logo"><img style="width: 40%;" src="/img/logo.png" alt="logo"></figure-->
       <nav>
-        <ul class="container-flex space-center list-unstyled">
+        <!--ul class="container-flex space-center list-unstyled">
           <li><a href="{{ route('login') }}" class="c-gris-2 text-uppercase active"><i class="fas fa-home"></i> Inicio</a></li>
           <li><a href="{{ route('pages.archive') }}" class="c-gris-2 text-uppercase"><i class="fas fa-archive"></i> Archivo</a></li>
           <li><a href="{{ route('pages.contact') }}" class="c-gris-2 text-uppercase"><i class="fas fa-envelope"></i> Contacto</a></li>
-        </ul>
+        </ul-->
       </nav>
-      <div class="divider-2"></div>
-      <p>Una sociedad que progresa, para un pueblo que lo necesita.</p> <p>
+      <!--div class="divider-2"></div>
+      <p>Una sociedad que progresa, para un pueblo que lo necesita.</p--> 
+      <center>
+      <p >
         &copy;
         <script>
           document.write(new Date().getFullYear())
-        </script>, Sistema InvenTICs <i class="material-icons">favorite</i> by 
-      <span class="c-white">Camara de Comercio de Tumaco</span></p>
-      <div class="divider-2" style="width:60%;"></div>
+        </script>
+        Sistema InvenTICs<br>
+        <i class="material-icons">favorite </i> by
+      <span class="c-white">Camara de Comercio de Tumaco</span>
+    </p>
+    </center>
+      <!--div class="divider-2" style="width:60%;"></div-->
      
     </div>
 </footer>
@@ -94,10 +101,10 @@
           }
       }
 
-      document.getElementById('toggle').addEventListener('click', function (e) {
-          toggleMenu();
-          e.preventDefault();
-      });
+      //document.getElementById('toggle').addEventListener('click', function (e) {
+      //    toggleMenu();
+      //    e.preventDefault();
+      //});
 
       window.addEventListener(WINDOW_CHANGE_EVENT, closeMenu);
       })(this, this.document);

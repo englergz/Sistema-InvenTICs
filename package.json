@@ -20,5 +20,10 @@
         "postcss": "^8.4.12",
         "postcss-import": "^12.0.1",
         "tailwindcss": "^2.0.1"
+    },
+    "dependencies": {
+        "dropzone": "^6.0.0-beta.2",
+        "jquery": "^3.6.3",
+        "moment": "^2.29.4"
     }
 }

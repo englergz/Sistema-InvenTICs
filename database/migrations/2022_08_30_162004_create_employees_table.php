@@ -15,19 +15,22 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('type_id');
-            $table->string('num_id')->unique();
-            $table->string('first_name');
+            $table->bigInteger('document_id')->nullable();
+            $table->string('num_id')->unique()->nullable();
+            $table->string('first_name')->nullable();
             $table->string('second_name')->nullable();
-            $table->string('surname');
+            $table->string('surname')->nullable();
             $table->string('second_surname')->nullable();
             $table->string('profession')->nullable();
-            $table->string('process');
-            $table->string('position');
+            $table->string('process')->nullable();
+            $table->string('position')->nullable();
             $table->string('email')->nullable();
-            $table->string('phone')->unique();
+            $table->string('phone')->unique()->nullable();
             $table->string('address')->nullable(); 
             $table->string('admission_at')->nullable();
+            $table->string('status')->nullable();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+
             $table->timestamps();
         });
     }
