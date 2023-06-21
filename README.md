@@ -1,15 +1,12 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-Proyecto en desarrollo, de momento para el curso academico 
-## Seminario de Computación e Informatica II, de la Universidad de Nariño.
+
+## Sistema de Inventario TIC para la Cámara de Comercio en el municipio de Tumaco.
     Elaborado en Laravel en la versión 8.x + TailwindCSS + Jetstream + Livewire + Stisla
 
 ## Descripción
 
 Software para el manejo administrativo de equipos y/o dispositivos, asignación de responsables, calidad de préstamo, generar cuentas, registrar productos(estilo blog), manejo de roles (Admin, Supervisor...), permisos (para publicar, generar cuenta, crear roles...)
-
-## Grupo de Trabajo
-    Egresado de Ingeniería de Sistemas.
 
 ## Instalación
 
