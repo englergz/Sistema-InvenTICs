@@ -1,1 +1,29 @@
-node_modules
+# Laravel common
+/vendor/
+/node_modules/
+/public/storage
+/storage/*.key
+/.env
+/.env.*
+/.idea/
+/.vscode/
+/.phpunit.result.cache
+/vendor/
+/.composer/
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Logs
+/storage/logs/*.log
+
+# npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build files
+/public/hot
+/public/css
+/public/js

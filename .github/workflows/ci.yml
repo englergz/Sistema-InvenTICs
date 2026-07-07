@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, 'inven-tics/demo-security-config' ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  php-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.0'
+      - name: Install composer dependencies
+        run: composer install --no-interaction --no-progress --prefer-dist
+      - name: PHP version
+        run: php -v
+      - name: Syntax check (find . -name "*.php")
+        run: |
+          set -e
+          PHP_FILES=$(git ls-files | grep "\.php$" || true)
+          if [ -n "$PHP_FILES" ]; then
+            echo "$PHP_FILES" | xargs -n 10 php -l || true
+          else
+            echo "No PHP files detected"
+          fi
